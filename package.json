@@ -1,0 +1,16 @@
+{
+  "name": "gizalift",
+  "version": "0.0.1",
+  "author": "David Tobin <dtobin08@gmail.com>",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "dependencies": {    
+    "restify": "2.5.x",   
+    "moment": "1.6.x",
+    "mysql": "2.0.0-alpha7",            
+    "sequelize": "1.6.0"    
+  }
+}
