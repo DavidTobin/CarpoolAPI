@@ -5,11 +5,13 @@
  * @author David Tobin <dtobin08@gmail.com> 
  */
 
-var restify     = require('restify'),    
-    listenPort  = 3000,
-    DEBUG       = true,
-    db          = require('./models/definitions').db,    
-    server      = restify.createServer({  
+var restify         = require('restify'),    
+    listenPort      = 3000,
+    DEBUG           = true,
+    db              = require('./models/definitions').db,  
+    passport        = require('passport'),
+    OAuth2Strategy  = require('passport-oauth').OAuth2Strategy
+    server          = restify.createServer({  
       name: 'Carpool API',
     });
 
@@ -23,6 +25,10 @@ server.use(
   }
 );
 server.use(restify.bodyParser({ mapParams: false }));
+server.use(passport.initialize());
+server.use(passport.session());
+server.use(restify.jsonp());
+server.use(restify.dateParser());
 
 console.log("*-------------------------------------*");
 console.log("|         GizALift API Server         |");
@@ -33,11 +39,12 @@ console.log("|                                     |");
 console.log("*-------------------------------------*");
 
 // Server Controllers
-var general = require('./routes/general');
-var lift    = require('./routes/lift');
+var general = require('./routes/general'),
+    lift    = require('./routes/lift')
 
 // Models
-var liftModel = require('./models/lift');
+var liftModel = require('./models/lift'),
+    userModel = require('./models/user');
 
 // DB Sync
 db.sync().success(function() {
@@ -52,7 +59,18 @@ server.pre(function(req, res, next) {
   return next();
 });
 
-// Routes
+// Authentication
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  userModel.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+// #### Routes
 
 // General
 server.get('countys', general.countys);
