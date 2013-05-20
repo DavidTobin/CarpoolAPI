@@ -60,15 +60,7 @@ server.pre(function(req, res, next) {
 });
 
 // Authentication
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
 
-passport.deserializeUser(function(id, done) {
-  userModel.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
 
 // #### Routes
 

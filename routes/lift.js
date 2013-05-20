@@ -1,8 +1,14 @@
 var Lift = require('../models/lift').Model;
 
-exports.lifts = function(req, res, next) {
+exports.lifts = function(req, res, next) {  
+  var county = req.query.county || "";
+    
   // Find all lifts
-  Lift.findAll().success(function(lifts) {
+  Lift.findAll({
+    where: {
+      destination: county
+    }
+  }).success(function(lifts) {
     res.send({
       lifts: lifts
     });
