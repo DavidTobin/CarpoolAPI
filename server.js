@@ -71,4 +71,5 @@ server.get('countys', general.countys);
 server.get('lifts', lift.lifts);
 server.post('lifts', lift.new_lift);
 server.put('lifts/:lift_id', lift.update_lift);
+server.get('lifts/:lift_id', lift.view_lift);
 
