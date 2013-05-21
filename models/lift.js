@@ -8,6 +8,8 @@ exports.Model = db.define('Lift', {
   description: Sequelize.TEXT,
   paid: Sequelize.BOOLEAN,
   user: Sequelize.INTEGER,
+  location: Sequelize.STRING,
+  locationCoords: Sequelize.STRING,
   destination: Sequelize.STRING,
   registered: Sequelize.BOOLEAN
 });

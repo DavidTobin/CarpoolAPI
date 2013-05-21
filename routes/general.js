@@ -4,7 +4,7 @@
 
 exports.countys = function(req, res, next) {
   res.send({
-    countys: [
+    countys: [    
     {
       name: 'Cork',
       id: 'C'  

@@ -12,6 +12,7 @@
     "moment": "1.6.x",
     "mysql": "2.0.0-alpha7",            
     "sequelize": "1.6.0",
-    "passport": "0.1.17"    
+    "passport": "0.1.17",
+    "passport-oauth": "*"    
   }
 }
