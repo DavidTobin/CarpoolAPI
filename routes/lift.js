@@ -44,10 +44,11 @@ exports.update_lift = function(req, res, next) {
 }
 
 exports.new_lift = function(req, res, next) {      
-  Lift.create(req.body.lift).success(function(lift) {            
+  Lift.create(req.body.lift).success(function(lift, created) {
+    console.log(lift.id);            
     res.send({
-      lift: req.body.lift
-    });    
+      lift: lift
+    });           
   });
   
   return next();
